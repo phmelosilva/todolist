@@ -1,0 +1,22 @@
+<%= form_with(model: lista_tarefa) do |form| %>
+  <% if lista_tarefa.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(lista_tarefa.errors.count, "error") %> prohibited this lista_tarefa from being saved:</h2>
+
+      <ul>
+        <% lista_tarefa.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :nome_lista, style: "display: block" %>
+    <%= form.text_field :nome_lista %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

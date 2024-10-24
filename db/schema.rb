@@ -10,5 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 0) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_22_235442) do
+  create_table "lista_tarefas", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "nome_lista"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tarefas", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "nome_tarefa"
+    t.string "status"
+    t.bigint "lista_tarefa_id", null: false
+    t.string "etiquetas"
+    t.datetime "prazo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lista_tarefa_id"], name: "index_tarefas_on_lista_tarefa_id"
+  end
+
+  add_foreign_key "tarefas", "lista_tarefas"
 end
