@@ -1,16 +1,21 @@
-<p style="color: green"><%= notice %></p>
+<div class='container'>
+  <p class="text-center" style="color: green"><%= notice %></p>
 
-<% content_for :title, "Lista tarefas" %>
+  <% content_for :title, "Listas de Tarefas" %>
+  <h1 class="text-center"><%= content_for(:title) || "Listas de Tarefas" %></h1>
 
-<h1>Lista tarefas</h1>
+  <div id="lista_tarefas" class='tasks-list'>
+    <% @lista_tarefas.each do |lista_tarefa| %>
+      <div class="todo-item">
+        <%= render lista_tarefa %>
+        <p>
+          <%= link_to "Entre na Lista", lista_tarefa %>
+        </p>
+          <%= button_to "Deletar", lista_tarefa, method: :delete, data: { confirm: "Você tem certeza que deseja deletar esta lista?" }, class: "btn btn-danger btn-sm" %>
+      </div>
+    <% end %>
+  </div>
 
-<div id="lista_tarefas">
-  <% @lista_tarefas.each do |lista_tarefa| %>
-    <%= render lista_tarefa %>
-    <p>
-      <%= link_to "Show this lista tarefa", lista_tarefa %>
-    </p>
-  <% end %>
+  <%= link_to "Adicionar nova Lista de Tarefa", new_lista_tarefa_path, class: "btn btn-primary" %>
+
 </div>
-
-<%= link_to "New lista tarefa", new_lista_tarefa_path %>

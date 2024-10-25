@@ -1,22 +1,24 @@
-<%= form_with(model: lista_tarefa) do |form| %>
-  <% if lista_tarefa.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(lista_tarefa.errors.count, "error") %> prohibited this lista_tarefa from being saved:</h2>
+<div class='container-md'>
+  <%= form_with(model: lista_tarefa, local: true) do |form| %>
+    <% if lista_tarefa.errors.any? %>
+      <div class="alert alert-danger">
+        <h2><%= pluralize(lista_tarefa.errors.count, "error") %> prohibited this lista_tarefa from being saved:</h2>
 
-      <ul>
-        <% lista_tarefa.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% lista_tarefa.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :nome_lista, class: "form-label" %>
+      <%= form.text_field :nome_lista, class: "form-control", placeholder: "Adicionar Lista de Tarefas", style: "color: #fff; background-color: #333;" %>
+    </div>
+
+    <div>
+      <%= form.submit lista_tarefa.persisted? ? "Editar nome da Lista" : "Criar Lista", class: "btn btn-primary", style: "background-color: #007bff; border: none;" %>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :nome_lista, style: "display: block" %>
-    <%= form.text_field :nome_lista %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

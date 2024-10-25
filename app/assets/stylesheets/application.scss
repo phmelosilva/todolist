@@ -17,6 +17,11 @@ body {
   font-family: var(--font-family);
 }
 
+.form-control {
+    color: #333;
+    background-color: #f8f9fa;
+}
+
 .lista-tarefa-nome {
   font-size: 3.5rem; 
   font-weight: bold;
@@ -33,6 +38,9 @@ body {
 .btn-primary {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
+  &:hover {
+    background-color: #0056b3; 
+    }
 }
 
 .btn-secondary {

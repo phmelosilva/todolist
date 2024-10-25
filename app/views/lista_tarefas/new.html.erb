@@ -1,11 +1,15 @@
-<% content_for :title, "New lista tarefa" %>
+<div class='container'>
 
-<h1>New lista tarefa</h1>
+  <% content_for :title, "Nova Lista de Tarefas" %>
 
-<%= render "form", lista_tarefa: @lista_tarefa %>
+  <h1>Qual o nome da sua Lista de Tarefas?</h1>
 
-<br>
+  <%= render "form", lista_tarefa: @lista_tarefa %>
 
-<div>
-  <%= link_to "Back to lista tarefas", lista_tarefas_path %>
+  <br>
+
+  <div>
+    <%= link_to "Back to lista tarefas", lista_tarefas_path %>
+  </div>
+
 </div>
