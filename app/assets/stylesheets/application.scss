@@ -1,0 +1,137 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+:root {
+  --background-color: #1b1f23; 
+  --primary-color: #007bff; 
+  --secondary-color: #6c757d; 
+  --task-color: #002D5D;
+  --todo-color: #5D066E;
+  --text-color: #eaeaea; 
+  --font-family: 'Arial', sans-serif; 
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
+}
+
+.lista-tarefa-nome {
+  font-size: 3.5rem; 
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+}
+
+.lista-tarefa-nome .edit-icon {
+  padding-left: 30px;
+  font-size: 2.4rem; 
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: var(--text-color);
+}
+
+p {
+  font-size: 1.5rem;
+}
+
+.tasks-list-name-container {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 30px;
+}
+
+.task-center {
+    flex: 1; 
+    display: flex; 
+    justify-content: center; 
+}
+.task-input {
+    margin-bottom: 20px;
+  }
+  
+.task-add-input {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.task-add-input::placeholder {
+    color: #888;
+}
+
+.tasks-list {
+    margin-top: 20px;
+  }
+  
+.task-item {
+    display: flex;
+    align-items: center;
+    background-color: var(--task-color);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--todo-color);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.todo-item p {
+    color: var(--text-color);
+    font-size: 24px;
+}
+
+.task-checkbox {
+    margin-right: 10px;
+}
+
+.task-content {
+    flex-grow: 1;
+}
+
+.task-content p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.task-date {
+    font-size: 12px;
+    color: #888;
+}
+
+.task-action {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.task-action .btn {
+    width: 100px; 
+}

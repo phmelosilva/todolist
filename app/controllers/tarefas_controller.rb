@@ -61,14 +61,20 @@ class TarefasController < ApplicationController
     # end
   end
 
+  def update_status
+    @tarefa = Tarefa.find(params[:id])
+    if @tarefa.update(status: params[:tarefa][:status])
+      redirect_to lista_tarefa_path(@tarefa.lista_tarefa), notice: 'Tarefa atualizada com sucesso.'
+    else
+      redirect_to lista_tarefa_path(@tarefa.lista_tarefa), alert: 'Erro ao atualizar a tarefa.'
+    end
+  end
+
   # DELETE /tarefas/1 or /tarefas/1.json
   def destroy
+    @tarefa = Tarefa.find(params[:id])
     @tarefa.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to tarefas_path, status: :see_other, notice: "Tarefa was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to lista_tarefa_path(@tarefa.lista_tarefa), notice: 'Tarefa excluída com sucesso.'
   end
 
   private

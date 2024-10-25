@@ -1,40 +1,59 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+  <p style="color: green"><%= notice %></p>
 
-<%= render @lista_tarefa %>
-
-<div>
-  <%= link_to "Edit this lista tarefa", edit_lista_tarefa_path(@lista_tarefa) %> |
-  <%= link_to "Back to lista tarefas", lista_tarefas_path %>
-
-  <% @lista_tarefa.tarefas.each do |tarefa| %>
-
-    <% if tarefa.status %> 
-      <strike>
-        <p><%= tarefa.nome_tarefa %></p>
-      </strike>
-
-      <%= form_for tarefa do |f| %>
-        <%= f.check_box :status %> 
-        <%= f.submit "Desfazer" %>
+  <div> 
+    <div class='tasks-list-name-container d-flex justify-content-between align-items-center'>
+      <%= link_to lista_tarefas_path, class: "btn btn-secondary", style: "color: #fff;" do %>
+          <i class="bi bi-arrow-left"></i> Listas
       <% end %>
+      <div class="task-center">
+          <%= render @lista_tarefa %>
+      </div>
+    </div>
 
-    <% else %> 
-      <p><%= tarefa.nome_tarefa %></p> 
-
-      <%= form_for tarefa do |f| %>
-        <%= f.check_box :status %> 
-        <%= f.submit "Feito" %> 
+    <div class="task-input">
+      <%= form_for @tarefa do |f| %>
+        <%= f.text_area :nome_tarefa, placeholder: "+ Adicionar Tarefa", class: "form-control task-add-input", rows: 1 %>
+        <%= f.hidden_field :lista_tarefa_id, value: @lista_tarefa.id %>
+        <%= f.submit "Adicionar", class: "btn btn-primary" %>
       <% end %>
+    </div>
+  </div>
 
-    <% end %>
 
-  <% end %>
+  <div>
+    <div class="tasks-list">
+      <% @lista_tarefa.tarefas.each do |tarefa| %>
+        <div class="task-item">
+          <div class="task-checkbox">
+            <%= form_for tarefa, url: update_status_tarefa_path(tarefa), method: :patch do |f| %>
+              <%= f.check_box :status, { class: "form-check-input", checked: tarefa.status }, true, false %>
+            <% end %>
+          </div>
+          <div class="task-content">
+            <% if tarefa.status %> 
+              <strike>
+                <p><%= tarefa.nome_tarefa %></p>
+              </strike>
+            <% else %>
+              <p><%= tarefa.nome_tarefa %></p> 
+            <% end %>
+            <small class="task-date">Até Hoje</small>
+          </div>
 
-  <%= form_for @tarefa do |f| %>
-    <p><%= f.text_field :nome_tarefa, placeholder: "Digite a nova tarefa" %></p>
-    <%= f.hidden_field :lista_tarefa_id, value: @lista_tarefa.id %>
-    <%= f.submit "Adicionar Tarefa" %> 
-  <% end %>
+          <div class="task-action">
+            <% if tarefa.status %>
+              <%= button_to "Desfeito", update_status_tarefa_path(tarefa, tarefa: { status: false }), method: :patch, class: "btn btn-warning" %>
+            <% else %>
+              <%= button_to "Feito", update_status_tarefa_path(tarefa, tarefa: { status: true }), method: :patch, class: "btn btn-success" %>
+            <% end %>
 
-  <%= button_to "Destroy this lista tarefa", @lista_tarefa, method: :delete %>
+             <%= button_to "Deletar", tarefa_path(tarefa), method: :delete, class: "btn btn-danger mt-2" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+      <%= button_to "Delete esta Lista de Tarefas", @lista_tarefa, method: :delete, class: "btn btn-danger mt-3" %>
+  </div>
 </div>
