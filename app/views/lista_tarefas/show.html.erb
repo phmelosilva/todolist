@@ -6,5 +6,35 @@
   <%= link_to "Edit this lista tarefa", edit_lista_tarefa_path(@lista_tarefa) %> |
   <%= link_to "Back to lista tarefas", lista_tarefas_path %>
 
+  <% @lista_tarefa.tarefas.each do |tarefa| %>
+
+    <% if tarefa.status %> 
+      <strike>
+        <p><%= tarefa.nome_tarefa %></p>
+      </strike>
+
+      <%= form_for tarefa do |f| %>
+        <%= f.check_box :status %> 
+        <%= f.submit "Desfazer" %>
+      <% end %>
+
+    <% else %> 
+      <p><%= tarefa.nome_tarefa %></p> 
+
+      <%= form_for tarefa do |f| %>
+        <%= f.check_box :status %> 
+        <%= f.submit "Feito" %> 
+      <% end %>
+
+    <% end %>
+
+  <% end %>
+
+  <%= form_for @tarefa do |f| %>
+    <p><%= f.text_field :nome_tarefa, placeholder: "Digite a nova tarefa" %></p>
+    <%= f.hidden_field :lista_tarefa_id, value: @lista_tarefa.id %>
+    <%= f.submit "Adicionar Tarefa" %> 
+  <% end %>
+
   <%= button_to "Destroy this lista tarefa", @lista_tarefa, method: :delete %>
 </div>

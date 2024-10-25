@@ -8,6 +8,8 @@ class ListaTarefasController < ApplicationController
 
   # GET /lista_tarefas/1 or /lista_tarefas/1.json
   def show
+    @tarefa = Tarefa.new
+    @tarefas = @lista_tarefa.tarefas
   end
 
   # GET /lista_tarefas/new
@@ -65,6 +67,6 @@ class ListaTarefasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def lista_tarefa_params
-      params.require(:lista_tarefa).permit(:nome_lista)
+      params.require(:lista_tarefa).permit(:nome_lista, :status, :etiquetas, )
     end
 end

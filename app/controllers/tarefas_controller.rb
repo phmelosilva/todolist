@@ -23,28 +23,42 @@ class TarefasController < ApplicationController
   def create
     @tarefa = Tarefa.new(tarefa_params)
 
-    respond_to do |format|
-      if @tarefa.save
-        format.html { redirect_to @tarefa, notice: "Tarefa was successfully created." }
-        format.json { render :show, status: :created, location: @tarefa }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @tarefa.errors, status: :unprocessable_entity }
-      end
+    if @tarefa.save 
+      redirect_to lista_tarefa_path(@tarefa.lista_tarefa_id)
+    else 
+      redirect_to root_path
     end
+
+    # respond_to do |format|
+    #   if @tarefa.save
+    #     format.html { redirect_to @tarefa, notice: "Tarefa was successfully created." }
+    #     format.json { render :show, status: :created, location: @tarefa }
+    #   else
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     format.json { render json: @tarefa.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /tarefas/1 or /tarefas/1.json
   def update
-    respond_to do |format|
-      if @tarefa.update(tarefa_params)
-        format.html { redirect_to @tarefa, notice: "Tarefa was successfully updated." }
-        format.json { render :show, status: :ok, location: @tarefa }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @tarefa.errors, status: :unprocessable_entity }
-      end
+    @tarefa = Tarefa.find(params[:id])
+
+    if @tarefa.update(tarefa_params)
+      redirect_to lista_tarefa_path(@tarefa.lista_tarefa_id)
+    else
+      redirect_to_root_path
     end
+
+    # respond_to do |format|
+    #   if @tarefa.update(tarefa_params)
+    #     format.html { redirect_to @tarefa, notice: "Tarefa was successfully updated." }
+    #     format.json { render :show, status: :ok, location: @tarefa }
+    #   else
+    #     format.html { render :edit, status: :unprocessable_entity }
+    #     format.json { render json: @tarefa.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /tarefas/1 or /tarefas/1.json
@@ -65,6 +79,6 @@ class TarefasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tarefa_params
-      params.require(:tarefa).permit(:nome_tarefa, :status, :lista_tarefa_id, :etiquetas, :prazo)
+      params.require(:tarefa).permit(:nome_tarefa, :status, :lista_tarefa_id, :etiquetas, :prazo, :lista_tarefa_id)
     end
 end
