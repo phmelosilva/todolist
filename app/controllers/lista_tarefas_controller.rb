@@ -27,7 +27,7 @@ class ListaTarefasController < ApplicationController
 
     respond_to do |format|
       if @lista_tarefa.save
-        format.html { redirect_to @lista_tarefa, notice: "Lista tarefa was successfully created." }
+        format.html { redirect_to @lista_tarefa, notice: "Lista de tarefas foi criada com sucesso." }
         format.json { render :show, status: :created, location: @lista_tarefa }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class ListaTarefasController < ApplicationController
   def update
     respond_to do |format|
       if @lista_tarefa.update(lista_tarefa_params)
-        format.html { redirect_to @lista_tarefa, notice: "Lista tarefa was successfully updated." }
+        format.html { redirect_to @lista_tarefa, notice: "Lista de tarefas foi atualizada com sucesso." }
         format.json { render :show, status: :ok, location: @lista_tarefa }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,7 +54,7 @@ class ListaTarefasController < ApplicationController
     @lista_tarefa.destroy!
 
     respond_to do |format|
-      format.html { redirect_to lista_tarefas_path, status: :see_other, notice: "Lista tarefa was successfully destroyed." }
+      format.html { redirect_to lista_tarefas_path, status: :see_other, notice: "Lista de tarefas foi destruída com sucesso." }
       format.json { head :no_content }
     end
   end
