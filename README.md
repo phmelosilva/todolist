@@ -1,24 +1,40 @@
-# README
+# To-Do List - Desafio Individual V360
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Este Repositório apresenta o objetivo de cumprir o desafio individual, sendo o case a criação de um To-Do List. 
 
-Things you may want to cover:
+O desafio em questão é o seguinte
 
-* Ruby version
+```` Fazer um TO DO List, onde este, tem que ter no mínimo: ````
 
-* System dependencies
+1) Poder criar várias listas de TO DO;
 
-* Configuration
+2) Cada lista tem que poder ser adicionado vários itens.
 
-* Database creation
+Com isso, a organização do desafio foi realizada a partir do GitHub Projects, com a criação de um backlog simples para levar em consideração o que uma lista de tarefas útil deve ter de funcionalidades.
 
-* Database initialization
+P
 
-* How to run the test suite
+Para rodar a aplicação e testar, primeiro faça um **git clone** e depois basta usar no terminal o comando:
 
-* Services (job queues, cache servers, search engines, etc.)
+```` 
+rails s
+````
 
-* Deployment instructions
+Veja algumas imagens da aplicação:
 
-* ...
+<center>
+
+![Tela de uma Lista](./app/assets/images/todolist.png)
+
+Tela de uma Lista
+</center>
+
+<center>
+
+![Tela de Listas de Tarefas](./app/assets/images/todolist2.png)
+
+Tela de Listas de Tarefa
+</center>
+
+
+
