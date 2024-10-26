@@ -8,7 +8,7 @@
   --task-color: #002D5D;
   --todo-color: #5D066E;
   --text-color: #eaeaea; 
-  --font-family: 'Arial', sans-serif; 
+  --font-family: "Arial", sans-serif; 
 }
 
 body {
@@ -143,3 +143,11 @@ p {
 .task-action .btn {
     width: 100px; 
 }
+
+.delete-historic-container .btn-danger {
+    margin-bottom: 10px; /* Distância abaixo do botão de deletar */
+}
+
+.delete-historic-container .btn {
+    width: 270px;
+ }

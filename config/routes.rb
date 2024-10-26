@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
-  resources :tarefas do
+  resources :lista_tarefas do
     member do
-      patch :update_status
+      get :historico 
+    end
+
+    resources :tarefas do
+      member do
+        patch :update_status  
+        patch :restore_status
+      end
     end
   end
-  resources :tarefas, only: [:create, :update, :destroy]
-  resources :lista_tarefas
-  root 'lista_tarefas#index'
-
+  
+  root "lista_tarefas#index"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -23,9 +23,9 @@ class TarefasController < ApplicationController
   def create
     @tarefa = Tarefa.new(tarefa_params)
 
-    if @tarefa.save 
+    if @tarefa.save
       redirect_to lista_tarefa_path(@tarefa.lista_tarefa_id)
-    else 
+    else
       redirect_to root_path
     end
 
@@ -64,9 +64,18 @@ class TarefasController < ApplicationController
   def update_status
     @tarefa = Tarefa.find(params[:id])
     if @tarefa.update(status: params[:tarefa][:status])
-      redirect_to lista_tarefa_path(@tarefa.lista_tarefa), notice: 'Tarefa atualizada com sucesso.'
+      redirect_to lista_tarefa_path(@tarefa.lista_tarefa), notice: "Tarefa atualizada com sucesso."
     else
-      redirect_to lista_tarefa_path(@tarefa.lista_tarefa), alert: 'Erro ao atualizar a tarefa.'
+      redirect_to lista_tarefa_path(@tarefa.lista_tarefa), alert: "Erro ao atualizar a tarefa."
+    end
+  end
+
+  def restore_status
+    @tarefa = Tarefa.find(params[:id])
+    if @tarefa.update(status: false) 
+      redirect_to lista_tarefa_path(@tarefa.lista_tarefa), notice: "Tarefa restaurada para 'em andamento'."
+    else
+      redirect_to historico_lista_tarefa_path(@tarefa.lista_tarefa), alert: "Erro ao restaurar a tarefa."
     end
   end
 
@@ -74,7 +83,7 @@ class TarefasController < ApplicationController
   def destroy
     @tarefa = Tarefa.find(params[:id])
     @tarefa.destroy!
-    redirect_to lista_tarefa_path(@tarefa.lista_tarefa), notice: 'Tarefa excluída com sucesso.'
+    redirect_to lista_tarefa_path(@tarefa.lista_tarefa), notice: "Tarefa excluída com sucesso."
   end
 
   private

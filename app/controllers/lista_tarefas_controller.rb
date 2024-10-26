@@ -59,6 +59,12 @@ class ListaTarefasController < ApplicationController
     end
   end
 
+  
+  def historico
+    @lista_tarefa = ListaTarefa.find(params[:id])
+    @tarefas_concluidas = @lista_tarefa.tarefas.where(status: true)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_lista_tarefa
@@ -67,6 +73,6 @@ class ListaTarefasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def lista_tarefa_params
-      params.require(:lista_tarefa).permit(:nome_lista, :status, :etiquetas, )
+      params.require(:lista_tarefa).permit(:nome_lista, :status, :etiquetas,)
     end
 end

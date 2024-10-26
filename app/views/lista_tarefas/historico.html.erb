@@ -1,0 +1,23 @@
+<div class="container">
+  <h2>Histórico de Tarefas Concluídas</h2>
+  <p style="color: green"><%= notice %></p>
+
+  <div class="tasks-list">
+    <% @tarefas_concluidas.each do |tarefa| %>
+      <div class="task-item">
+        <div class="task-content">
+          <strike>
+            <p><%= tarefa.nome_tarefa %></p>
+          </strike>
+          <small class="task-date"><%= tarefa.prazo&.strftime("%d/%m/%Y") || "Sem prazo" %></small>
+        </div>
+
+        <div class="task-action">
+          <%= button_to "Restaurar", lista_tarefa_tarefa_path(@lista_tarefa, tarefa), method: :patch, class: "btn btn-warning" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to "Voltar para Lista", lista_tarefa_path(@lista_tarefa), class: "btn btn-secondary mt-3" %>
+</div>

@@ -2,7 +2,7 @@
   <p style="color: green"><%= notice %></p>
 
   <div> 
-    <div class='tasks-list-name-container d-flex justify-content-between align-items-center'>
+    <div class="tasks-list-name-container d-flex justify-content-between align-items-center">
       <%= link_to lista_tarefas_path, class: "btn btn-secondary", style: "color: #fff;" do %>
           <i class="bi bi-arrow-left"></i> Listas
       <% end %>
@@ -12,7 +12,7 @@
     </div>
 
     <div class="task-input">
-      <%= form_for @tarefa do |f| %>
+      <%= form_for [@lista_tarefa, @tarefa] do |f| %>
         <%= f.text_area :nome_tarefa, placeholder: "+ Adicionar Tarefa", class: "form-control task-add-input", rows: 1 %>
         <%= f.hidden_field :lista_tarefa_id, value: @lista_tarefa.id %>
         <%= f.submit "Adicionar", class: "btn btn-primary" %>
@@ -26,7 +26,7 @@
       <% @lista_tarefa.tarefas.each do |tarefa| %>
         <div class="task-item">
           <div class="task-checkbox">
-            <%= form_for tarefa, url: update_status_tarefa_path(tarefa), method: :patch do |f| %>
+            <%= form_for tarefa, url: update_status_lista_tarefa_tarefa_path(@lista_tarefa, tarefa), method: :patch do |f| %>
               <%= f.check_box :status, { class: "form-check-input", checked: tarefa.status }, true, false %>
             <% end %>
           </div>
@@ -43,17 +43,20 @@
 
           <div class="task-action">
             <% if tarefa.status %>
-              <%= button_to "Desfeito", update_status_tarefa_path(tarefa, tarefa: { status: false }), method: :patch, class: "btn btn-warning" %>
+              <%= button_to "Desfeito", update_status_lista_tarefa_tarefa_path(@lista_tarefa, tarefa, tarefa: { status: false }), method: :patch, class: "btn btn-warning" %>
             <% else %>
-              <%= button_to "Feito", update_status_tarefa_path(tarefa, tarefa: { status: true }), method: :patch, class: "btn btn-success" %>
+              <%= button_to "Feito", update_status_lista_tarefa_tarefa_path(@lista_tarefa, tarefa, tarefa: { status: true }), method: :patch, class: "btn btn-success" %>
             <% end %>
 
-             <%= button_to "Deletar", tarefa_path(tarefa), method: :delete, class: "btn btn-danger mt-2" %>
+             <%= button_to "Deletar", lista_tarefa_tarefa_path(@lista_tarefa, tarefa), method: :delete, class: "btn btn-danger mt-2" %>
           </div>
         </div>
       <% end %>
     </div>
 
+    <div class="delete-historic-container">
       <%= button_to "Delete esta Lista de Tarefas", @lista_tarefa, method: :delete, class: "btn btn-danger mt-3" %>
+      <%= link_to "Ver Histórico de Tarefas Concluídas", historico_lista_tarefa_path(@lista_tarefa), class: "btn btn-info mt-3" %>
+    </div>
   </div>
 </div>
